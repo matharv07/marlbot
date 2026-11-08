@@ -95,6 +95,26 @@ Test the environment with no policy:
 python scripts/play.py xTerra-Mjlab-Velocity-Flat-SvanM2 --agent zero
 ```
 
+### Multi-Agent Pac-Man Simulation (Continuous MuJoCo + pacman.py)
+
+Launch the multi-agent Pac-Man simulation coupling SvanM2 quadruped locomotion in MuJoCo with the synchronized 2D continuous `pacman.py` visualizer:
+
+```bash
+# Launch both MuJoCo 3D viewer & continuous map pacman.py window simultaneously
+python launch.py
+python launch.py --stage 1
+python launch.py --stage 2 --speedup 2.0
+
+# 2D continuous visualizer only
+python launch.py --gui 2d
+
+# MuJoCo 3D viewer only
+python launch.py --gui 3d
+
+# Headless benchmark
+python launch.py --headless --max_time 30
+```
+
 ## Tasks
 
 | Task ID | Description |

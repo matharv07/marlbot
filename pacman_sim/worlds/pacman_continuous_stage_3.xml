@@ -1,0 +1,537 @@
+<mujoco model="pacman_stage_3">
+  <compiler angle="radian" autolimits="true"/>
+  <option timestep="0.002" gravity="0 0 -9.81"/>
+  <asset>
+    <material name="wall_mat" rgba="0.1 0.1 0.6 1"/>
+    <material name="pellet_mat" rgba="0.9 0.9 0.9 1"/>
+    <material name="power_mat" rgba="1.0 0.84 0.0 1"/>
+    <material name="floor_mat" rgba="0.2 0.2 0.2 1"/>
+  </asset>
+  <worldbody>
+    <geom name="floor" type="plane" size="61.5 49.5 0.1" material="floor_mat"/>
+    <light diffuse="0.8 0.8 0.8" pos="0 0 10" dir="0 0 -1"/>
+    <geom name="capsule_wall_0" type="capsule" fromto="-30.7500 -24.7500 0.3750 30.7500 -24.7500 0.3750" size="0.7500" material="wall_mat"/>
+    <geom name="capsule_wall_1" type="capsule" fromto="-30.7500 24.7500 0.3750 30.7500 24.7500 0.3750" size="0.7500" material="wall_mat"/>
+    <geom name="capsule_wall_2" type="capsule" fromto="-30.7500 -24.7500 0.3750 -30.7500 24.7500 0.3750" size="0.7500" material="wall_mat"/>
+    <geom name="capsule_wall_3" type="capsule" fromto="30.7500 -24.7500 0.3750 30.7500 24.7500 0.3750" size="0.7500" material="wall_mat"/>
+    <geom name="capsule_wall_4" type="capsule" fromto="13.4061 -11.0972 0.3750 18.6664 -9.8058 0.3750" size="0.6668" material="wall_mat"/>
+    <geom name="capsule_wall_5" type="capsule" fromto="18.6664 -9.8058 0.3750 23.4977 -8.2405 0.3750" size="0.6668" material="wall_mat"/>
+    <geom name="capsule_wall_6" type="capsule" fromto="27.0883 -9.9126 0.3750 30.0000 -13.3192 0.3750" size="0.6668" material="wall_mat"/>
+    <geom name="capsule_wall_7" type="capsule" fromto="-8.8661 -14.9866 0.3750 -5.4511 -16.9889 0.3750" size="1.0189" material="wall_mat"/>
+    <geom name="capsule_wall_8" type="capsule" fromto="-5.4511 -16.9889 0.3750 -3.2730 -22.2096 0.3750" size="1.0189" material="wall_mat"/>
+    <geom name="capsule_wall_9" type="capsule" fromto="-11.4786 5.5958 0.3750 -9.0155 2.2154 0.3750" size="0.6473" material="wall_mat"/>
+    <geom name="capsule_wall_10" type="capsule" fromto="-9.0155 2.2154 0.3750 -9.3245 -3.0134 0.3750" size="0.6473" material="wall_mat"/>
+    <geom name="capsule_wall_11" type="capsule" fromto="-7.1230 -8.5591 0.3750 -2.4989 -11.8912 0.3750" size="0.6473" material="wall_mat"/>
+    <geom name="capsule_wall_12" type="capsule" fromto="-2.4989 -11.8912 0.3750 0.7686 -15.3665 0.3750" size="0.6473" material="wall_mat"/>
+    <geom name="capsule_wall_13" type="capsule" fromto="-12.9327 18.9945 0.3750 -14.7909 15.3004 0.3750" size="0.7257" material="wall_mat"/>
+    <geom name="capsule_wall_14" type="capsule" fromto="-14.7909 15.3004 0.3750 -15.1997 11.2031 0.3750" size="0.7257" material="wall_mat"/>
+    <geom name="capsule_wall_15" type="capsule" fromto="-16.9220 5.4802 0.3750 -17.2635 0.4888 0.3750" size="0.7257" material="wall_mat"/>
+    <geom name="capsule_wall_16" type="capsule" fromto="-17.2635 0.4888 0.3750 -15.9924 -5.0127 0.3750" size="0.7257" material="wall_mat"/>
+    <geom name="capsule_wall_17" type="capsule" fromto="-25.9684 -8.0278 0.3750 -23.9498 -2.5142 0.3750" size="0.7374" material="wall_mat"/>
+    <geom name="capsule_wall_18" type="capsule" fromto="-23.9498 -2.5142 0.3750 -25.0581 1.8039 0.3750" size="0.7374" material="wall_mat"/>
+    <geom name="capsule_wall_19" type="capsule" fromto="-13.0492 -11.0217 0.3750 -18.1144 -11.0520 0.3750" size="0.8753" material="wall_mat"/>
+    <geom name="capsule_wall_20" type="capsule" fromto="-18.1144 -11.0520 0.3750 -21.8361 -13.8374 0.3750" size="0.8753" material="wall_mat"/>
+    <geom name="capsule_wall_21" type="capsule" fromto="-27.7188 -14.9895 0.3750 -30.0000 -15.4725 0.3750" size="0.8753" material="wall_mat"/>
+    <geom name="capsule_wall_22" type="capsule" fromto="2.9540 19.2457 0.3750 -2.0392 16.4130 0.3750" size="0.7508" material="wall_mat"/>
+    <geom name="capsule_wall_23" type="capsule" fromto="-2.0392 16.4130 0.3750 -5.3698 12.0622 0.3750" size="0.7508" material="wall_mat"/>
+    <geom name="capsule_wall_24" type="capsule" fromto="-8.8493 9.3521 0.3750 -12.5819 8.9218 0.3750" size="0.7508" material="wall_mat"/>
+    <geom name="capsule_wall_25" type="capsule" fromto="-12.5819 8.9218 0.3750 -17.3687 6.4895 0.3750" size="0.7508" material="wall_mat"/>
+    <geom name="capsule_wall_26" type="capsule" fromto="7.7117 4.7402 0.3750 8.6514 9.6140 0.3750" size="0.7791" material="wall_mat"/>
+    <geom name="capsule_wall_27" type="capsule" fromto="8.6514 9.6140 0.3750 7.4028 14.3971 0.3750" size="0.7791" material="wall_mat"/>
+    <geom name="capsule_wall_28" type="capsule" fromto="1.8152 -16.2794 0.3750 2.4226 -20.3560 0.3750" size="1.1868" material="wall_mat"/>
+    <geom name="capsule_wall_29" type="capsule" fromto="2.4226 -20.3560 0.3750 3.1316 -24.0000 0.3750" size="1.1868" material="wall_mat"/>
+    <geom name="capsule_wall_30" type="capsule" fromto="11.8187 -4.3938 0.3750 8.1228 -8.8302 0.3750" size="1.0139" material="wall_mat"/>
+    <geom name="capsule_wall_31" type="capsule" fromto="8.1228 -8.8302 0.3750 5.1172 -11.9162 0.3750" size="1.0139" material="wall_mat"/>
+    <geom name="capsule_wall_32" type="capsule" fromto="1.3393 -12.2992 0.3750 -3.6460 -13.2441 0.3750" size="1.0139" material="wall_mat"/>
+    <geom name="capsule_wall_33" type="capsule" fromto="-3.6460 -13.2441 0.3750 -8.0519 -10.2221 0.3750" size="1.0139" material="wall_mat"/>
+    <geom name="capsule_wall_34" type="capsule" fromto="-9.0692 -6.4555 0.3750 -6.9706 -2.4822 0.3750" size="1.0139" material="wall_mat"/>
+    <geom name="capsule_wall_35" type="capsule" fromto="-6.9706 -2.4822 0.3750 -5.0148 1.4331 0.3750" size="1.0139" material="wall_mat"/>
+    <geom name="capsule_wall_36" type="capsule" fromto="-20.4067 18.9449 0.3750 -25.4810 16.7836 0.3750" size="0.7285" material="wall_mat"/>
+    <geom name="capsule_wall_37" type="capsule" fromto="-25.4810 16.7836 0.3750 -28.0958 13.5245 0.3750" size="0.7285" material="wall_mat"/>
+    <geom name="capsule_wall_38" type="capsule" fromto="16.6829 -16.9968 0.3750 17.9190 -13.1239 0.3750" size="1.0369" material="wall_mat"/>
+    <geom name="capsule_wall_39" type="capsule" fromto="17.9190 -13.1239 0.3750 21.4066 -9.8392 0.3750" size="1.0369" material="wall_mat"/>
+    <geom name="capsule_wall_40" type="capsule" fromto="22.2474 -6.0108 0.3750 20.6971 -0.5507 0.3750" size="1.0369" material="wall_mat"/>
+    <geom name="capsule_wall_41" type="capsule" fromto="20.6971 -0.5507 0.3750 22.5677 4.3198 0.3750" size="1.0369" material="wall_mat"/>
+    <geom name="capsule_wall_42" type="capsule" fromto="19.3526 -14.5155 0.3750 15.3821 -12.0908 0.3750" size="1.1558" material="wall_mat"/>
+    <geom name="capsule_wall_43" type="capsule" fromto="15.3821 -12.0908 0.3750 13.9500 -7.7166 0.3750" size="1.1558" material="wall_mat"/>
+    <geom name="capsule_wall_44" type="capsule" fromto="10.9108 10.0270 0.3750 13.0991 5.7043 0.3750" size="0.7711" material="wall_mat"/>
+    <geom name="capsule_wall_45" type="capsule" fromto="13.0991 5.7043 0.3750 12.9823 1.4661 0.3750" size="0.7711" material="wall_mat"/>
+    <geom name="capsule_wall_46" type="capsule" fromto="9.3616 -2.5475 0.3750 4.9461 -3.1443 0.3750" size="0.7711" material="wall_mat"/>
+    <geom name="capsule_wall_47" type="capsule" fromto="4.9461 -3.1443 0.3750 0.9264 -0.4795 0.3750" size="0.7711" material="wall_mat"/>
+    <geom name="capsule_wall_48" type="capsule" fromto="-23.3038 -13.6666 0.3750 -26.0387 -16.9578 0.3750" size="1.1765" material="wall_mat"/>
+    <geom name="capsule_wall_49" type="capsule" fromto="-26.0387 -16.9578 0.3750 -30.0000 -18.0511 0.3750" size="1.1765" material="wall_mat"/>
+    <geom name="capsule_wall_50" type="capsule" fromto="8.7342 2.8374 0.3750 8.5543 8.0912 0.3750" size="0.6492" material="wall_mat"/>
+    <geom name="capsule_wall_51" type="capsule" fromto="8.5543 8.0912 0.3750 9.6848 12.2892 0.3750" size="0.6492" material="wall_mat"/>
+    <geom name="capsule_wall_52" type="capsule" fromto="13.6058 15.7084 0.3750 18.2598 19.2368 0.3750" size="0.6492" material="wall_mat"/>
+    <geom name="capsule_wall_53" type="capsule" fromto="24.0459 16.5676 0.3750 26.3755 13.1877 0.3750" size="0.7591" material="wall_mat"/>
+    <geom name="capsule_wall_54" type="capsule" fromto="26.3755 13.1877 0.3750 30.0000 11.5108 0.3750" size="0.7591" material="wall_mat"/>
+    <geom name="capsule_wall_55" type="capsule" fromto="-19.1226 -9.4936 0.3750 -16.5889 -4.8420 0.3750" size="1.0455" material="wall_mat"/>
+    <geom name="capsule_wall_56" type="capsule" fromto="-16.5889 -4.8420 0.3750 -16.9108 0.0345 0.3750" size="1.0455" material="wall_mat"/>
+    <geom name="capsule_wall_57" type="capsule" fromto="-4.2415 -9.7144 0.3750 0.4122 -7.4315 0.3750" size="0.6554" material="wall_mat"/>
+    <geom name="capsule_wall_58" type="capsule" fromto="0.4122 -7.4315 0.3750 5.8146 -7.0245 0.3750" size="0.6554" material="wall_mat"/>
+    <geom name="capsule_wall_59" type="capsule" fromto="24.7003 8.3094 0.3750 29.1950 9.1933 0.3750" size="0.6671" material="wall_mat"/>
+    <geom name="capsule_wall_60" type="capsule" fromto="29.1950 9.1933 0.3750 30.0000 9.4232 0.3750" size="0.6671" material="wall_mat"/>
+    <geom name="capsule_wall_61" type="capsule" fromto="-16.0908 -10.8955 0.3750 -13.4571 -5.7961 0.3750" size="1.1394" material="wall_mat"/>
+    <geom name="capsule_wall_62" type="capsule" fromto="17.2478 16.5916 0.3750 21.1186 18.8816 0.3750" size="1.1857" material="wall_mat"/>
+    <geom name="capsule_wall_63" type="capsule" fromto="-25.6008 -1.2750 0.3750 -27.1678 2.9825 0.3750" size="0.8295" material="wall_mat"/>
+    <geom name="capsule_wall_64" type="capsule" fromto="-27.1678 2.9825 0.3750 -30.0000 5.3936 0.3750" size="0.8295" material="wall_mat"/>
+    <geom name="capsule_wall_65" type="capsule" fromto="20.2216 20.3097 0.3750 18.6204 24.0000 0.3750" size="0.7970" material="wall_mat"/>
+    <geom name="capsule_wall_66" type="capsule" fromto="9.2848 24.0000 0.3750 7.9570 21.6092 0.3750" size="0.7970" material="wall_mat"/>
+    <geom name="capsule_wall_67" type="capsule" fromto="7.9570 21.6092 0.3750 8.9612 17.3795 0.3750" size="0.7970" material="wall_mat"/>
+    <geom name="capsule_wall_68" type="capsule" fromto="-3.5301 21.0643 0.3750 -2.9198 24.0000 0.3750" size="1.0719" material="wall_mat"/>
+    <geom name="pellet_0" type="sphere" pos="-14.8125 3.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_1" type="sphere" pos="0.5625 5.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_2" type="sphere" pos="11.8125 -19.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_3" type="sphere" pos="-19.6875 0.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_4" type="sphere" pos="27.1875 -6.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_5" type="sphere" pos="5.8125 -18.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_6" type="sphere" pos="17.4375 21.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_7" type="sphere" pos="-7.6875 6.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_8" type="sphere" pos="3.1875 -8.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_9" type="sphere" pos="-5.8125 7.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_10" type="sphere" pos="27.5625 -21.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_11" type="sphere" pos="-24.5625 4.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_12" type="sphere" pos="-2.4375 -0.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_13" type="sphere" pos="-23.4375 14.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_14" type="sphere" pos="21.5625 9.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_15" type="sphere" pos="-11.0625 19.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_16" type="sphere" pos="-23.0625 8.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_17" type="sphere" pos="14.0625 -4.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_18" type="sphere" pos="24.5625 -4.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_19" type="sphere" pos="-3.1875 9.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_20" type="sphere" pos="-24.5625 -21.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_21" type="sphere" pos="-6.1875 20.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_22" type="sphere" pos="-11.4375 13.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_23" type="sphere" pos="4.3125 -17.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_24" type="sphere" pos="15.1875 -21.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_25" type="sphere" pos="-6.9375 15.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_26" type="sphere" pos="-20.0625 -5.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_27" type="sphere" pos="-9.5625 -12.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_28" type="sphere" pos="-17.4375 20.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_29" type="sphere" pos="2.8125 4.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_30" type="sphere" pos="26.0625 17.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_31" type="sphere" pos="-3.9375 6.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_32" type="sphere" pos="-12.5625 -14.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_33" type="sphere" pos="-3.9375 -15.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_34" type="sphere" pos="-5.0625 9.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_35" type="sphere" pos="17.0625 -2.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_36" type="sphere" pos="-6.5625 4.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_37" type="sphere" pos="-19.3125 2.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_38" type="sphere" pos="28.3125 -2.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_39" type="sphere" pos="-21.1875 16.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_40" type="sphere" pos="28.6875 19.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_41" type="sphere" pos="-18.5625 14.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_42" type="sphere" pos="-18.5625 10.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_43" type="sphere" pos="-28.3125 18.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_44" type="sphere" pos="14.0625 20.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_45" type="sphere" pos="8.8125 -0.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_46" type="sphere" pos="-12.1875 -1.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_47" type="sphere" pos="-25.3125 8.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_48" type="sphere" pos="2.8125 12.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_49" type="sphere" pos="10.6875 -9.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_50" type="sphere" pos="-5.0625 16.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_51" type="sphere" pos="18.1875 6.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_52" type="sphere" pos="-13.3125 -18.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_53" type="sphere" pos="-20.8125 -1.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_54" type="sphere" pos="20.4375 -20.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_55" type="sphere" pos="21.9375 -16.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_56" type="sphere" pos="-5.4375 18.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_57" type="sphere" pos="5.8125 -15.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_58" type="sphere" pos="-14.0625 -3.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_59" type="sphere" pos="-0.5625 22.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_60" type="sphere" pos="-0.1875 -4.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_61" type="sphere" pos="-15.9375 -17.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_62" type="sphere" pos="-7.6875 -21.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_63" type="sphere" pos="-22.6875 2.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_64" type="sphere" pos="26.4375 5.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_65" type="sphere" pos="25.3125 2.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_66" type="sphere" pos="14.8125 0.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_67" type="sphere" pos="24.5625 -2.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_68" type="sphere" pos="25.3125 -17.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_69" type="sphere" pos="-9.1875 5.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_70" type="sphere" pos="11.0625 -11.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_71" type="sphere" pos="-24.5625 19.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_72" type="sphere" pos="-22.6875 4.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_73" type="sphere" pos="2.0625 10.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_74" type="sphere" pos="-9.1875 17.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_75" type="sphere" pos="7.3125 -5.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_76" type="sphere" pos="-14.8125 0.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_77" type="sphere" pos="-26.0625 -21.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_78" type="sphere" pos="-13.3125 12.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_79" type="sphere" pos="-2.4375 -18.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_80" type="sphere" pos="-6.9375 9.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_81" type="sphere" pos="11.4375 -0.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_82" type="sphere" pos="-28.6875 15.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_83" type="sphere" pos="-0.9375 8.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_84" type="sphere" pos="17.4375 -19.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_85" type="sphere" pos="14.8125 23.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_86" type="sphere" pos="-1.3125 20.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_87" type="sphere" pos="14.4375 -20.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_88" type="sphere" pos="19.3125 14.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_89" type="sphere" pos="19.3125 -17.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_90" type="sphere" pos="25.3125 20.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_91" type="sphere" pos="-5.4375 22.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_92" type="sphere" pos="-21.9375 23.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_93" type="sphere" pos="-8.4375 18.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_94" type="sphere" pos="-23.4375 -11.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_95" type="sphere" pos="-26.4375 23.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_96" type="sphere" pos="11.4375 -22.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_97" type="sphere" pos="-11.8125 11.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_98" type="sphere" pos="7.3125 -16.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_99" type="sphere" pos="-12.9375 21.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_100" type="sphere" pos="29.0625 -4.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_101" type="sphere" pos="28.6875 -17.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_102" type="sphere" pos="28.6875 1.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_103" type="sphere" pos="3.9375 -0.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_104" type="sphere" pos="-2.4375 -5.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_105" type="sphere" pos="-20.8125 5.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_106" type="sphere" pos="10.6875 15.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_107" type="sphere" pos="13.6875 13.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_108" type="sphere" pos="9.9375 -14.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_109" type="sphere" pos="15.5625 12.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_110" type="sphere" pos="-18.9375 -19.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_111" type="sphere" pos="-25.3125 -12.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_112" type="sphere" pos="6.1875 -0.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_113" type="sphere" pos="6.9375 -20.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_114" type="sphere" pos="-11.8125 -9.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_115" type="sphere" pos="-23.4375 -9.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_116" type="sphere" pos="21.9375 -14.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_117" type="sphere" pos="13.6875 -14.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_118" type="sphere" pos="-21.5625 9.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_119" type="sphere" pos="-11.0625 -20.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_120" type="sphere" pos="2.0625 20.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_121" type="sphere" pos="-0.1875 2.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_122" type="sphere" pos="-14.4375 -15.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_123" type="sphere" pos="6.1875 15.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_124" type="sphere" pos="13.6875 11.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_125" type="sphere" pos="-19.6875 17.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_126" type="sphere" pos="13.3125 -16.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_127" type="sphere" pos="-18.5625 18.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_128" type="sphere" pos="-15.9375 -22.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_129" type="sphere" pos="23.4375 9.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_130" type="sphere" pos="-28.6875 11.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_131" type="sphere" pos="4.3125 14.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_132" type="sphere" pos="-7.3125 12.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_133" type="sphere" pos="-2.8125 1.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_134" type="sphere" pos="-13.3125 4.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_135" type="sphere" pos="9.1875 -11.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_136" type="sphere" pos="17.0625 4.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_137" type="sphere" pos="29.0625 14.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_138" type="sphere" pos="3.1875 2.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_139" type="sphere" pos="18.5625 -7.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_140" type="sphere" pos="8.8125 -18.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_141" type="sphere" pos="3.5625 -13.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_142" type="sphere" pos="28.3125 5.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_143" type="sphere" pos="-2.4375 12.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_144" type="sphere" pos="27.5625 15.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_145" type="sphere" pos="11.4375 -13.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_146" type="sphere" pos="-24.9375 6.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_147" type="sphere" pos="24.5625 -12.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_148" type="sphere" pos="-28.3125 21.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_149" type="sphere" pos="21.9375 11.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_150" type="sphere" pos="-4.3125 3.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_151" type="sphere" pos="23.4375 21.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_152" type="sphere" pos="0.9375 12.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_153" type="sphere" pos="28.3125 3.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_154" type="sphere" pos="28.3125 17.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_155" type="sphere" pos="17.0625 0.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_156" type="sphere" pos="21.1875 -22.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_157" type="sphere" pos="-18.9375 6.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_158" type="sphere" pos="11.0625 18.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_159" type="sphere" pos="-14.4375 -20.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_160" type="sphere" pos="-11.8125 -22.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_161" type="sphere" pos="-20.0625 8.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_162" type="sphere" pos="-27.9375 -11.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_163" type="sphere" pos="-20.4375 12.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_164" type="sphere" pos="-15.5625 20.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_165" type="sphere" pos="-9.9375 -16.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_166" type="sphere" pos="25.3125 -8.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_167" type="sphere" pos="-1.6875 -10.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_168" type="sphere" pos="-20.4375 -15.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_169" type="sphere" pos="19.3125 3.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_170" type="sphere" pos="26.8125 -18.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_171" type="sphere" pos="17.8125 8.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_172" type="sphere" pos="-4.3125 -4.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_173" type="sphere" pos="-20.4375 -21.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_174" type="sphere" pos="18.1875 13.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_175" type="sphere" pos="14.8125 9.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_176" type="sphere" pos="7.6875 -14.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_177" type="sphere" pos="17.0625 -22.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_178" type="sphere" pos="15.5625 8.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_179" type="sphere" pos="0.9375 14.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_180" type="sphere" pos="-21.9375 -17.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_181" type="sphere" pos="-1.6875 -15.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_182" type="sphere" pos="24.9375 12.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_183" type="sphere" pos="23.8125 18.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_184" type="sphere" pos="26.4375 22.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_185" type="sphere" pos="-16.3125 -13.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_186" type="sphere" pos="28.3125 22.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_187" type="sphere" pos="-26.4375 20.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_188" type="sphere" pos="-10.3125 -10.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_189" type="sphere" pos="28.6875 -14.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_190" type="sphere" pos="18.9375 -5.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_191" type="sphere" pos="18.9375 -22.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_192" type="sphere" pos="-18.1875 -21.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_193" type="sphere" pos="5.8125 20.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_194" type="sphere" pos="-22.6875 -7.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_195" type="sphere" pos="25.6875 -15.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_196" type="sphere" pos="5.8125 10.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_197" type="sphere" pos="-11.4375 17.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_198" type="sphere" pos="5.8125 0.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_199" type="sphere" pos="-12.1875 2.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_200" type="sphere" pos="-22.6875 13.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_201" type="sphere" pos="17.4375 2.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_202" type="sphere" pos="-26.8125 6.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_203" type="sphere" pos="-8.4375 22.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_204" type="sphere" pos="-7.6875 2.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_205" type="sphere" pos="-11.4375 -6.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_206" type="sphere" pos="23.4375 7.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_207" type="sphere" pos="-2.0625 4.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_208" type="sphere" pos="-0.9375 -22.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_209" type="sphere" pos="-23.0625 21.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_210" type="sphere" pos="-8.4375 3.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_211" type="sphere" pos="13.6875 -2.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_212" type="sphere" pos="11.8125 -17.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_213" type="sphere" pos="-15.5625 22.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_214" type="sphere" pos="-24.5625 12.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_215" type="sphere" pos="5.0625 11.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_216" type="sphere" pos="-9.1875 13.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_217" type="sphere" pos="-11.0625 -3.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_218" type="sphere" pos="16.6875 -6.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_219" type="sphere" pos="20.0625 6.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_220" type="sphere" pos="-5.4375 -7.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_221" type="sphere" pos="-18.5625 -15.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_222" type="sphere" pos="-24.9375 14.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_223" type="sphere" pos="-9.5625 -18.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_224" type="sphere" pos="-26.4375 -3.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_225" type="sphere" pos="-16.6875 -20.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_226" type="sphere" pos="-11.4375 15.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_227" type="sphere" pos="7.3125 -12.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_228" type="sphere" pos="3.5625 5.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_229" type="sphere" pos="3.9375 20.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_230" type="sphere" pos="11.8125 22.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_231" type="sphere" pos="-17.8125 -18.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_232" type="sphere" pos="14.8125 6.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_233" type="sphere" pos="10.3125 6.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_234" type="sphere" pos="4.3125 18.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_235" type="sphere" pos="-9.9375 -21.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_236" type="sphere" pos="-28.3125 -6.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_237" type="sphere" pos="-26.4375 12.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_238" type="sphere" pos="9.9375 -20.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_239" type="sphere" pos="-19.3125 -3.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_240" type="sphere" pos="-21.5625 7.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_241" type="sphere" pos="7.6875 0.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_242" type="sphere" pos="-24.9375 21.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_243" type="sphere" pos="15.1875 3.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_244" type="sphere" pos="-21.9375 -3.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_245" type="sphere" pos="21.5625 20.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_246" type="sphere" pos="-28.6875 -9.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_247" type="sphere" pos="26.4375 -2.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_248" type="sphere" pos="11.4375 11.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_249" type="sphere" pos="-10.3125 11.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_250" type="sphere" pos="21.9375 22.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_251" type="sphere" pos="26.8125 -0.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_252" type="sphere" pos="5.4375 -21.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_253" type="sphere" pos="-28.3125 -3.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_254" type="sphere" pos="24.1875 -0.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_255" type="sphere" pos="27.1875 10.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_256" type="sphere" pos="-9.1875 20.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_257" type="sphere" pos="10.6875 0.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_258" type="sphere" pos="-11.0625 22.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_259" type="sphere" pos="15.1875 -18.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_260" type="sphere" pos="-5.4375 -22.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_261" type="sphere" pos="2.4375 23.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_262" type="sphere" pos="-27.5625 9.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_263" type="sphere" pos="-11.0625 -15.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_264" type="sphere" pos="18.9375 11.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_265" type="sphere" pos="-2.0625 18.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_266" type="sphere" pos="22.6875 14.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_267" type="sphere" pos="1.3125 -5.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_268" type="sphere" pos="-20.0625 20.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_269" type="sphere" pos="8.8125 -4.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_270" type="sphere" pos="-1.3125 13.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_271" type="sphere" pos="5.8125 13.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_272" type="sphere" pos="-15.5625 1.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_273" type="sphere" pos="-15.1875 -18.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_274" type="sphere" pos="-24.1875 -18.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_275" type="sphere" pos="-11.8125 -16.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_276" type="sphere" pos="-1.3125 -20.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_277" type="sphere" pos="6.1875 3.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_278" type="sphere" pos="25.6875 -21.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_279" type="sphere" pos="26.0625 -5.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_280" type="sphere" pos="2.8125 14.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_281" type="sphere" pos="20.4375 12.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_282" type="sphere" pos="0.5625 3.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_283" type="sphere" pos="-15.9375 18.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_284" type="sphere" pos="1.6875 -3.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_285" type="sphere" pos="8.0625 -22.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_286" type="sphere" pos="-2.4375 7.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_287" type="sphere" pos="-16.3125 9.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_288" type="sphere" pos="4.3125 9.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_289" type="sphere" pos="-26.0625 -13.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_290" type="sphere" pos="15.9375 21.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_291" type="sphere" pos="24.9375 6.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_292" type="sphere" pos="-19.6875 -17.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_293" type="sphere" pos="20.0625 -6.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_294" type="sphere" pos="-0.9375 -2.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_295" type="sphere" pos="-17.8125 23.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_296" type="sphere" pos="0.5625 8.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_297" type="sphere" pos="6.1875 18.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_298" type="sphere" pos="10.6875 3.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_299" type="sphere" pos="1.3125 15.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_300" type="sphere" pos="15.5625 -1.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_301" type="sphere" pos="16.6875 6.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_302" type="sphere" pos="26.0625 -11.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_303" type="sphere" pos="12.9375 17.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_304" type="sphere" pos="-21.9375 -19.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_305" type="sphere" pos="-16.6875 -15.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_306" type="sphere" pos="-11.0625 -13.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_307" type="sphere" pos="10.3125 20.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_308" type="sphere" pos="23.4375 -15.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_309" type="sphere" pos="1.6875 -9.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_310" type="sphere" pos="20.0625 5.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_311" type="sphere" pos="-13.6875 10.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_312" type="sphere" pos="-13.6875 -22.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_313" type="sphere" pos="-23.8125 9.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_314" type="sphere" pos="18.5625 -20.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_315" type="sphere" pos="24.9375 4.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_316" type="sphere" pos="-0.1875 10.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_317" type="sphere" pos="16.6875 -8.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_318" type="sphere" pos="23.0625 -18.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_319" type="sphere" pos="-14.0625 -2.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_320" type="sphere" pos="24.5625 -10.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_321" type="sphere" pos="-21.1875 -8.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_322" type="sphere" pos="-20.0625 22.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_323" type="sphere" pos="2.4375 7.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_324" type="sphere" pos="-3.1875 -3.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_325" type="sphere" pos="-28.6875 0.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_326" type="sphere" pos="-16.6875 14.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_327" type="sphere" pos="-3.9375 11.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_328" type="sphere" pos="-24.9375 -10.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_329" type="sphere" pos="15.5625 -3.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_330" type="sphere" pos="-19.3125 -0.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_331" type="sphere" pos="-9.5625 -8.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_332" type="sphere" pos="23.0625 -22.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_333" type="sphere" pos="-27.5625 -20.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_334" type="sphere" pos="18.9375 1.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_335" type="sphere" pos="26.8125 19.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_336" type="sphere" pos="13.3125 21.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_337" type="sphere" pos="21.9375 6.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_338" type="sphere" pos="-3.5625 -7.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_339" type="sphere" pos="-17.8125 8.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_340" type="sphere" pos="1.6875 0.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_341" type="sphere" pos="-0.5625 19.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_342" type="sphere" pos="-27.1875 -22.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_343" type="sphere" pos="24.5625 -19.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_344" type="sphere" pos="9.1875 -12.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_345" type="sphere" pos="-3.9375 18.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_346" type="sphere" pos="12.5625 19.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_347" type="sphere" pos="0.1875 -20.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_348" type="sphere" pos="-0.5625 15.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_349" type="sphere" pos="19.6875 9.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_350" type="sphere" pos="8.4375 15.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_351" type="sphere" pos="14.8125 18.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_352" type="sphere" pos="27.1875 -16.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_353" type="sphere" pos="29.0625 6.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_354" type="sphere" pos="24.9375 23.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_355" type="sphere" pos="-14.0625 6.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_356" type="sphere" pos="3.1875 -3.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_357" type="sphere" pos="-21.5625 -11.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_358" type="sphere" pos="29.0625 -8.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_359" type="sphere" pos="-0.5625 -17.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_360" type="sphere" pos="16.3125 14.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_361" type="sphere" pos="3.1875 -11.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_362" type="sphere" pos="-22.6875 11.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_363" type="sphere" pos="20.0625 -16.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_364" type="sphere" pos="-22.6875 0.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_365" type="sphere" pos="14.8125 -15.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_366" type="sphere" pos="-6.1875 -5.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_367" type="sphere" pos="26.0625 -20.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_368" type="sphere" pos="-9.1875 15.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_369" type="sphere" pos="-14.4375 -14.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_370" type="sphere" pos="4.6875 -19.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_371" type="sphere" pos="18.9375 -2.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_372" type="sphere" pos="-28.6875 7.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_373" type="sphere" pos="-12.9375 0.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_374" type="sphere" pos="-28.3125 23.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_375" type="sphere" pos="24.1875 -6.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_376" type="sphere" pos="-1.3125 5.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_377" type="sphere" pos="-18.1875 -13.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_378" type="sphere" pos="4.6875 -4.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_379" type="sphere" pos="26.8125 1.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_380" type="sphere" pos="-0.9375 0.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_381" type="sphere" pos="-25.6875 10.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_382" type="sphere" pos="2.8125 16.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_383" type="sphere" pos="-7.6875 21.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_384" type="sphere" pos="13.3125 -0.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_385" type="sphere" pos="-28.6875 -1.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_386" type="sphere" pos="-11.0625 0.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_387" type="sphere" pos="21.9375 -20.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_388" type="sphere" pos="25.3125 10.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_389" type="sphere" pos="11.8125 13.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_390" type="sphere" pos="5.0625 4.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_391" type="sphere" pos="-25.3125 -19.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_392" type="sphere" pos="13.3125 -22.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_393" type="sphere" pos="-19.3125 5.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_394" type="sphere" pos="9.1875 -16.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_395" type="sphere" pos="18.5625 -0.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_396" type="sphere" pos="-21.1875 2.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_397" type="sphere" pos="-4.3125 -1.6875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_398" type="sphere" pos="13.3125 -18.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_399" type="sphere" pos="6.5625 8.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_400" type="sphere" pos="13.6875 8.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_401" type="sphere" pos="-28.6875 -13.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_402" type="sphere" pos="-8.8125 11.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_403" type="sphere" pos="-13.6875 20.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_404" type="sphere" pos="11.0625 5.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_405" type="sphere" pos="-22.3125 20.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_406" type="sphere" pos="12.1875 -8.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_407" type="sphere" pos="17.4375 -4.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_408" type="sphere" pos="-20.4375 14.4375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_409" type="sphere" pos="21.1875 -18.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_410" type="sphere" pos="-6.1875 -14.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_411" type="sphere" pos="-13.6875 2.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_412" type="sphere" pos="-26.8125 8.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_413" type="sphere" pos="3.9375 22.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_414" type="sphere" pos="-8.0625 -17.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_415" type="sphere" pos="-6.9375 17.0625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_416" type="sphere" pos="23.8125 1.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_417" type="sphere" pos="11.4375 -15.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_418" type="sphere" pos="-23.0625 6.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_419" type="sphere" pos="29.0625 -22.3125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_420" type="sphere" pos="-12.9375 14.8125 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_421" type="sphere" pos="-11.0625 -18.1875 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_422" type="sphere" pos="27.1875 6.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_423" type="sphere" pos="-12.1875 6.9375 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_424" type="sphere" pos="12.9375 -12.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="pellet_425" type="sphere" pos="-22.3125 -15.5625 0.3600" size="0.0500" material="pellet_mat" contype="0" conaffinity="0"/>
+    <geom name="power_0" type="sphere" pos="-26.4375 -9.5625 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_1" type="sphere" pos="23.8125 -20.8125 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_2" type="sphere" pos="3.5625 -15.1875 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_3" type="sphere" pos="-6.5625 -19.6875 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_4" type="sphere" pos="-12.5625 -20.8125 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_5" type="sphere" pos="5.0625 6.5625 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_6" type="sphere" pos="16.3125 11.0625 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_7" type="sphere" pos="-23.8125 -20.4375 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_8" type="sphere" pos="26.8125 -13.6875 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_9" type="sphere" pos="-5.0625 5.0625 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_10" type="sphere" pos="9.9375 13.6875 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_11" type="sphere" pos="-23.0625 -5.4375 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_12" type="sphere" pos="-19.6875 -14.0625 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_13" type="sphere" pos="22.3125 15.9375 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_14" type="sphere" pos="-26.4375 18.1875 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_15" type="sphere" pos="28.3125 -20.0625 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_16" type="sphere" pos="-10.3125 6.9375 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_17" type="sphere" pos="0.5625 -21.9375 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_18" type="sphere" pos="29.0625 -0.1875 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_19" type="sphere" pos="-17.8125 12.5625 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_20" type="sphere" pos="0.1875 -10.3125 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_21" type="sphere" pos="4.3125 15.9375 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_22" type="sphere" pos="-28.6875 -21.5625 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_23" type="sphere" pos="22.6875 -12.1875 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_24" type="sphere" pos="-16.6875 16.6875 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_25" type="sphere" pos="5.4375 23.0625 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_26" type="sphere" pos="-23.0625 -22.6875 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+    <geom name="power_27" type="sphere" pos="-5.0625 -3.1875 0.3800" size="0.1000" material="power_mat" contype="0" conaffinity="0"/>
+  </worldbody>
+</mujoco>
