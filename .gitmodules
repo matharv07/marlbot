@@ -1,0 +1,3 @@
+[submodule "pacmanbot"]
+	path = pacmanbot
+	url = https://github.com/matharv07/pacmanbot.git
