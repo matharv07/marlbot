@@ -16,6 +16,140 @@ import numpy as np
 import mujoco
 
 
+class LivoxMid360Lidar:
+    """Simulates a Livox Mid-360 non-repetitive scanning LiDAR for MuJoCo.
+
+    Livox Mid-360 Specifications:
+      • Ultra-wide Field of View: 360° Horizontal x -7° to 52° Vertical (59° Vertical FoV).
+      • Non-repetitive scanning trajectory (hypocycloid / rosette pattern).
+      • Point rate: 100,000 points/s (~2,000 points per 50 Hz frame).
+      • Range precision: 1σ < 2 cm @ 10m, minimum detection range: 0.1m, max range: 40m.
+      • Compact dome form factor mounted on the SvanM2 quadruped head / front torso.
+    """
+
+    def __init__(
+        self,
+        points_per_frame: int = 1200,      # Beam points simulated per 50 Hz control step
+        fov_up_deg: float = 52.0,          # Livox Mid-360 vertical upper FoV
+        fov_down_deg: float = -7.0,        # Livox Mid-360 vertical lower FoV
+        min_range: float = 0.10,           # 10 cm blind zone
+        max_range: float = 25.0,           # Max indoor/arena range
+        noise_std: float = 0.015,          # 1.5 cm range noise
+        dropout_prob: float = 0.012,
+        mount_offset_xyz: Tuple[float, float, float] = (0.18, 0.0, 0.10), # Mounted on SvanM2 head/front
+    ):
+        self.points_per_frame = points_per_frame
+        self.fov_up_rad = math.radians(fov_up_deg)
+        self.fov_down_rad = math.radians(fov_down_deg)
+        self.min_range = min_range
+        self.max_range = max_range
+        self.noise_std = noise_std
+        self.dropout_prob = dropout_prob
+        self.mount_offset_xyz = np.array(mount_offset_xyz, dtype=np.float64)
+
+        # Scanning rosette parameters (Livox dual-prism / non-repetitive rosette mechanics)
+        self.scan_phase = 0.0
+        self.w1 = 7.13   # Primary rotor angular frequency ratio
+        self.w2 = -4.91  # Secondary rotor angular frequency ratio
+
+    def scan(
+        self,
+        model: mujoco.MjModel,
+        data: mujoco.MjData,
+        sensor_pos: np.ndarray,
+        sensor_yaw: float = 0.0,
+        ignore_body_id: int = -1,
+    ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """Performs a Livox Mid-360 non-repetitive rosette beam scan.
+
+        Returns:
+            pointcloud: (N, 3) 3D points in world space
+            ranges: (N,) measured distance values
+            intensities: (N,) simulated optical return intensity
+        """
+        # Advance non-repetitive scan phase
+        t = np.linspace(self.scan_phase, self.scan_phase + 1.0, self.points_per_frame)
+        self.scan_phase = (self.scan_phase + 1.0) % 1000.0
+
+        # Rosette scanning pattern (hypocycloid in spherical angles)
+        azimuth = (self.w1 * t * 2.0 * np.pi) % (2.0 * np.pi) - np.pi
+        el_norm = 0.5 * (1.0 + np.sin(self.w2 * t * 2.0 * np.pi))
+        elevation = self.fov_down_rad + el_norm * (self.fov_up_rad - self.fov_down_rad)
+
+        cos_el = np.cos(elevation)
+        sin_el = np.sin(elevation)
+        dx_local = cos_el * np.cos(azimuth)
+        dy_local = cos_el * np.sin(azimuth)
+        dz_local = sin_el
+
+        # Rotate by host robot yaw heading
+        cos_y = math.cos(sensor_yaw)
+        sin_y = math.sin(sensor_yaw)
+
+        dx_world = cos_y * dx_local - sin_y * dy_local
+        dy_world = sin_y * dx_local + cos_y * dy_local
+        dz_world = dz_local
+
+        # Origin in world space = robot_pos + R_yaw @ mount_offset
+        mount_rotated = np.array([
+            cos_y * self.mount_offset_xyz[0] - sin_y * self.mount_offset_xyz[1],
+            sin_y * self.mount_offset_xyz[0] + cos_y * self.mount_offset_xyz[1],
+            self.mount_offset_xyz[2]
+        ], dtype=np.float64)
+        pos_origin = sensor_pos + mount_rotated
+
+        pointcloud = []
+        intensities = []
+        measured_ranges = []
+
+        geom_id_out = np.zeros(1, dtype=np.int32)
+        p_dir = np.zeros(3, dtype=np.float64)
+
+        for i in range(self.points_per_frame):
+            p_dir[0] = dx_world[i]
+            p_dir[1] = dy_world[i]
+            p_dir[2] = dz_world[i]
+
+            dist = mujoco.mj_ray(
+                model,
+                data,
+                pos_origin,
+                p_dir,
+                None,
+                1,
+                ignore_body_id,
+                geom_id_out
+            )
+
+            if self.min_range <= dist < self.max_range and geom_id_out[0] != -1:
+                if self.dropout_prob > 0.0 and np.random.rand() < self.dropout_prob:
+                    continue
+
+                noisy_dist = dist
+                if self.noise_std > 0.0:
+                    noisy_dist += np.random.normal(0.0, self.noise_std)
+                    noisy_dist = max(self.min_range, min(self.max_range, noisy_dist))
+
+                hit_pt = pos_origin + p_dir * noisy_dist
+                pointcloud.append(hit_pt)
+                measured_ranges.append(noisy_dist)
+                
+                # Diffuse reflectance model
+                intensity = float(np.clip(1.0 / (1.0 + 0.04 * noisy_dist), 0.1, 1.0))
+                intensities.append(intensity)
+
+        if len(pointcloud) > 0:
+            pc_arr = np.array(pointcloud, dtype=np.float32)
+            ranges_arr = np.array(measured_ranges, dtype=np.float32)
+            int_arr = np.array(intensities, dtype=np.float32)
+        else:
+            pc_arr = np.empty((0, 3), dtype=np.float32)
+            ranges_arr = np.empty((0,), dtype=np.float32)
+            int_arr = np.empty((0,), dtype=np.float32)
+
+        return pc_arr, ranges_arr, int_arr
+
+
 class MultiBeamLidar3D:
     """Simulates a multi-beam 3D LiDAR mounted on an agent in MuJoCo."""
 

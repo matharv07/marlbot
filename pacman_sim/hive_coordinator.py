@@ -31,6 +31,8 @@ if str(_PACMANBOT_DIR) not in sys.path:
 from ghost import Ghost, GHOST_COLORS, GHOST_SPEED
 from arena_builder import ContinuousArena
 from svanm2_runner import SvanM2Runner
+from lidar3d import LivoxMid360Lidar, ElevationTraversabilityMapper
+from mesh_comms import DecentralizedMeshNetwork
 from net import GhostActor, speed_idx_to_mult
 from obs import (
     build_spatial,
@@ -111,6 +113,39 @@ class HiveCoordinator:
 
             self.ghosts[gid] = g
             self.recent_nom[gid] = np.zeros((MAX_H, MAX_W), dtype=np.float32)
+
+        # Initialize Livox Mid-360 LiDAR and 2.5D Elevation / Traversability Mappers per SvanM2
+        self.lidars: Dict[int, LivoxMid360Lidar] = {
+            gid: LivoxMid360Lidar(
+                points_per_frame=1000,
+                fov_up_deg=52.0,
+                fov_down_deg=-7.0,
+                min_range=0.10,
+                max_range=20.0,
+                mount_offset_xyz=(0.18, 0.0, 0.10),
+            )
+            for gid in range(self.n_ghosts)
+        }
+        self.mappers: Dict[int, ElevationTraversabilityMapper] = {
+            gid: ElevationTraversabilityMapper(
+                resolution=0.15,
+                map_radius=8.0,
+                max_step_height=0.12,
+                robot_radius=0.35,
+            )
+            for gid in range(self.n_ghosts)
+        }
+        # Realistic ad-hoc mesh communication network (16m range, wall occlusion penalty, packet loss)
+        self.mesh_network = DecentralizedMeshNetwork(
+            max_comm_range=16.0,
+            nlos_range_penalty=0.55,
+            base_packet_drop_rate=0.02,
+        )
+        for gid in range(self.n_ghosts):
+            self.mesh_network.register_agent(gid)
+
+        self.latest_pointclouds: Dict[int, np.ndarray] = {gid: np.empty((0, 3), dtype=np.float32) for gid in range(self.n_ghosts)}
+        self.latest_traversability: Dict[int, Dict[str, np.ndarray]] = {}
 
         self._had_los_prev: Dict[int, bool] = {gid: False for gid in range(self.n_ghosts)}
         self._last_emergency_auction_frame: Dict[int, int] = {}
@@ -474,9 +509,55 @@ class HiveCoordinator:
                                 g.cbba_agent._phase1(g, cands, h_dists)
 
         # 4. Update all ghost autonomy logic
+        sim_time = self.frame_counter * self.dt_step
+        agent_positions = {
+            gid: (float(self.runners[gid].pos[0]), float(self.runners[gid].pos[1]))
+            for gid in self.ghosts.keys() if not self.ghosts[gid].dead
+        }
+
         for gid, g in self.ghosts.items():
             if g.dead:
                 continue
+
+            # 4a. Execute Livox Mid-360 3D LiDAR Scan
+            runner = self.runners[gid]
+            r_pos = runner.pos
+            r_yaw = runner.yaw
+            ignore_body = runner.root_body_id if hasattr(runner, 'root_body_id') else -1
+            
+            pc, ranges, intensities = self.lidars[gid].scan(
+                model=runner.model,
+                data=runner.data,
+                sensor_pos=r_pos,
+                sensor_yaw=r_yaw,
+                ignore_body_id=ignore_body,
+            )
+            self.latest_pointclouds[gid] = pc
+
+            # 4b. Update 2.5D Elevation & Traversability Map
+            if len(pc) > 0:
+                trav_data = self.mappers[gid].update_map(pc, r_pos)
+                self.latest_traversability[gid] = trav_data
+
+            # 4c. Broadcast heartbeats and status via the decentralized mesh network
+            if self.frame_counter % 5 == 0:
+                self.mesh_network.broadcast(
+                    sender_id=gid,
+                    sender_pos=(r_pos[0], r_pos[1]),
+                    agent_positions=agent_positions,
+                    packet_type="heartbeat",
+                    payload={"known_pacman": g.known_pacman, "is_powered": g.pacman_powered},
+                    sim_time=sim_time,
+                )
+
+            # Drain incoming mesh packets for this agent
+            incoming_packets = self.mesh_network.drain_inbox(gid)
+            for pkt in incoming_packets:
+                if pkt.packet_type == "heartbeat" and pkt.payload.get("known_pacman") is not None:
+                    # Received relayed sighting if we don't have our own fresh fix
+                    if g.known_pacman is None:
+                        g.known_pacman = pkt.payload["known_pacman"]
+                        g.pacman_last_seen = self.frame_counter
 
             # Calibrate step max_speed: 0.95 m/s when hunting, 0.80 m/s when patrolling
             is_hunting = (getattr(g, 'known_pacman', None) is not None or getattr(g, '_is_striking', False)) and not g.pacman_powered
