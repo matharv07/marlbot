@@ -350,27 +350,41 @@ class ContinuousArena:
                     g.rgba = [0.22, 0.22, 0.25, 1.0]
 
             # Mount Livox Mid-360 LiDAR puck on top of the SvanM2 robot's front head
-            base_body = robot_spec.find_body("base")
-            if base_body is not None:
-                # Cylindrical Livox Mid-360 body casing
-                lidar_mount = base_body.add_geom()
-                lidar_mount.name = f"livox_mount_{gid}"
-                lidar_mount.type = mujoco.mjtGeom.mjGEOM_CYLINDER
-                lidar_mount.pos = [0.18, 0.0, 0.075]  # Front top deck of SvanM2 torso
-                lidar_mount.size = [0.033, 0.015, 0.0]  # Radius 3.3cm, half-height 1.5cm
-                lidar_mount.rgba = [0.10, 0.10, 0.12, 1.0]
-                lidar_mount.contype = 0
-                lidar_mount.conaffinity = 0
+            # Find base body across bodies collection in robot_spec
+            base_body = None
+            for b in getattr(robot_spec, 'bodies', []):
+                if getattr(b, 'name', '') == 'base':
+                    base_body = b
+                    break
+            if base_body is None and hasattr(robot_spec, 'worldbody'):
+                for b in getattr(robot_spec.worldbody, 'bodies', []):
+                    if getattr(b, 'name', '') == 'base':
+                        base_body = b
+                        break
 
-                # Spherical optical dome (characteristic Livox Mid-360 dark glass dome)
-                lidar_dome = base_body.add_geom()
-                lidar_dome.name = f"livox_dome_{gid}"
-                lidar_dome.type = mujoco.mjtGeom.mjGEOM_SPHERE
-                lidar_dome.pos = [0.18, 0.0, 0.095]
-                lidar_dome.size = [0.032, 0.0, 0.0]
-                lidar_dome.rgba = [0.02, 0.78, 0.95, 0.85]  # Optical cyan sensor glass
-                lidar_dome.contype = 0
-                lidar_dome.conaffinity = 0
+            if base_body is not None:
+                try:
+                    # Cylindrical Livox Mid-360 body casing
+                    lidar_mount = base_body.add_geom()
+                    lidar_mount.name = f"livox_mount_{gid}"
+                    lidar_mount.type = mujoco.mjtGeom.mjGEOM_CYLINDER
+                    lidar_mount.pos = [0.18, 0.0, 0.075]  # Front top deck of SvanM2 torso
+                    lidar_mount.size = [0.033, 0.015, 0.0]  # Radius 3.3cm, half-height 1.5cm
+                    lidar_mount.rgba = [0.10, 0.10, 0.12, 1.0]
+                    lidar_mount.contype = 0
+                    lidar_mount.conaffinity = 0
+
+                    # Spherical optical dome (characteristic Livox Mid-360 dark glass dome)
+                    lidar_dome = base_body.add_geom()
+                    lidar_dome.name = f"livox_dome_{gid}"
+                    lidar_dome.type = mujoco.mjtGeom.mjGEOM_SPHERE
+                    lidar_dome.pos = [0.18, 0.0, 0.095]
+                    lidar_dome.size = [0.032, 0.0, 0.0]
+                    lidar_dome.rgba = [0.02, 0.78, 0.95, 0.85]  # Optical cyan sensor glass
+                    lidar_dome.contype = 0
+                    lidar_dome.conaffinity = 0
+                except Exception:
+                    pass
 
             prefix = f"ghost_{gid}/"
             spec.attach(robot_spec, prefix=prefix, frame=f)
