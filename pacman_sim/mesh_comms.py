@@ -134,3 +134,4 @@ class DecentralizedMeshNetwork:
         packets = self.inboxes[agent_id]
         self.inboxes[agent_id] = []
         return packets
+

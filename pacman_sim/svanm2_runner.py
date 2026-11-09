@@ -19,8 +19,6 @@ import torch
 import torch.nn as nn
 import mujoco
 
-from mjlab.utils.lab_api.math import quat_apply_inverse
-
 # Default stance joint angles (radians) for SvanM2
 DEFAULT_QPOS = np.array([
     0.0,  0.5806, -1.1716,  # FL: hip, thigh, calf
